@@ -80,16 +80,14 @@ class KeyManager {
       for (Object part : ((MultiKey) key).getKeys()) {
         setUp(part);
       }
-      ensureNode(parent, key).uses++;
-    } else if (key instanceof TreeKey) {
+    }
+    if (key instanceof TreeKey) {
       TreeKey treeKey = (TreeKey) key;
       final Object parentKey = treeKey.getParentKey();
       setUp(parentKey);
       parent = managedServices.get(parentKey).services;
-      ensureNode(parent, key).uses++;
-    } else {
-      ensureNode(parent, key).uses++;
     }
+    ensureNode(parent, key).uses++;
   }
 
   void tearDown(Object key) {
